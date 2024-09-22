@@ -23,7 +23,7 @@ pipeline {
                     }
                 }
 
-                stage("Install Dependencies") {
+                stage("Install Dependencies Jenkins") {
                     steps {
                         script {
                             dir('jenkins') {
@@ -89,7 +89,7 @@ pipeline {
                     }
                 }
 
-                stage("Install Dependencies") {
+                stage("Install Dependencies Robot-Test") {
                     steps {
                         script {
                             dir('robot_test') {
@@ -107,7 +107,7 @@ pipeline {
                         }
                     }
                 }
-                
+
                 stage("Run Robot-Test") {
                     steps {
                         dir('robot_test') {
