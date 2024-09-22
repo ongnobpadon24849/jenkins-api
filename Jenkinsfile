@@ -43,7 +43,10 @@ pipeline {
                     steps {
                         script {
                             dir('jenkins') {
-                                sh "python3 unittest.py"
+                                sh '''
+                                    . /home/test/workspace/TestAndDeploy/jenkins/env/bin/activate
+                                    python3 /home/test/workspace/TestAndDeploy/jenkins/unittest.py
+                                    '''
                             }
                         }
                     }
