@@ -28,7 +28,9 @@ pipeline {
                         script {
                             dir('jenkins') {
                                 sh '''
-                                    if [ ! -d "/home/test/workspace/TestAndDeploy/jenkins/env" ]; thenpython3 -m venv /home/test/workspace/TestAndDeploy/jenkins/envfi
+                                    if [ ! -d "/home/test/workspace/TestAndDeploy/jenkins/env" ]; then 
+                                    python3 -m venv /home/test/workspace/TestAndDeploy/jenkins/env
+                                    fi
                                     . /home/test/workspace/TestAndDeploy/jenkins/env/bin/activate
                                     pip install Flask
                                 '''
