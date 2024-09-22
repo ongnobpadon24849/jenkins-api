@@ -65,10 +65,10 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
-                            sh "echo 'test123' | sudo -S docker stop flask-app || true"
-                            sh "echo 'test123' | sudo docker rm -f flask-app || true"
-                            sh "echo 'test123' | sudo docker ps -a -q -f name=flask-app"
-                            sh "echo 'test123' | sudo docker run -d --name flask-app -p 5000:5000 flask-app"
+                            sh "docker stop flask-app || true"
+                            sh "docker rm -f flask-app || true"
+                            sh "docker ps -a -q -f name=flask-app"
+                            sh "docker run -d --name flask-app -p 5000:5000 flask-app"
                         }
                     }
                 }
