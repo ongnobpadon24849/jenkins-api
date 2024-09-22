@@ -65,10 +65,10 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
-                            sh "docker stop flask-app || true"
-                            sh "docker rm -f flask-app || true"
-                            sh "docker ps -a -q -f name=flask-app"
-                            sh "docker run -d --name flask-app -p 5000:5000 flask-app"
+                            sh "sudo -S docker stop flask-app || true"
+                            sh "sudo docker rm -f flask-app || true"
+                            sh "sudo docker ps -a -q -f name=flask-app"
+                            sh "sudo docker run -d --name flask-app -p 5000:5000 flask-app"
                         }
                     }
                 }
@@ -114,7 +114,7 @@ pipeline {
                             script {
                                 sh '''
                                     . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
-                                    python3 /home/test/workspace/TestAndDeploy/robot_test/robot test-plus.robot
+                                    python3 /home/test/workspace/TestAndDeploy/robot_test/test-plus.robot
                                     '''
                                 sh "docker ps -q -f name=flask-app | xargs -r docker stop"
                             }
