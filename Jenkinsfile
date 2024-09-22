@@ -101,7 +101,6 @@ pipeline {
                                     . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
                                     pip install robotframework
                                     pip install robotframework-seleniumlibrary
-                                    pip install webdrivermanager
                                     webdrivermanager chrome --linkpath /home/test/workspace/TestAndDeploy/robot_test/env/bin
                                 '''
                             }
