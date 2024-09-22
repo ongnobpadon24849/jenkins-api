@@ -114,7 +114,7 @@ pipeline {
                             script {
                                 sh '''
                                     . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
-                                    python3 /home/test/workspace/TestAndDeploy/robot_test/test-plus.robot
+                                    robot /home/test/workspace/TestAndDeploy/robot_test/test-plus.robot
                                     '''
                                 sh "docker ps -q -f name=flask-app | xargs -r docker stop"
                             }
