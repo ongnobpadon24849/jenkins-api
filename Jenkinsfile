@@ -23,6 +23,17 @@ pipeline {
                     }
                 }
 
+                stage("Install Dependencies") {
+                    steps {
+                        script {
+                            dir('jenkins') {
+                                sh "source /home/test/workspace/TestAndDeploy/jenkins/venv/bin/activate"
+                                sh "pip install flask"
+                            }
+                        }
+                    }
+                }
+
                 stage("Unit Test") {
                     steps {
                         script {
