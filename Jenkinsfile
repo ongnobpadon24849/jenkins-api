@@ -27,7 +27,7 @@ pipeline {
                     steps {
                         script {
                             dir('jenkins') {
-                                sh ". /home/test/workspace/TestAndDeploy/jenkins/venv/bin/activate"
+                                sh ". ~/env/bin/activate"
                                 sh "pip install flask"
                             }
                         }
