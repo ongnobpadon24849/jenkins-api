@@ -89,14 +89,33 @@ pipeline {
                     }
                 }
 
+                stage("Install Dependencies") {
+                    steps {
+                        script {
+                            dir('robot_test') {
+                                sh '''
+                                    if [ ! -d "/home/test/workspace/TestAndDeploy/robot_test/env" ]; then 
+                                    python3 -m venv /home/test/workspace/TestAndDeploy/robot_test/env
+                                    fi
+                                    . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
+                                    pip install robotframework
+                                    pip install robotframework-seleniumlibrary
+                                    pip install webdrivermanager
+                                    webdrivermanager chrome --linkpath /home/test/workspace/TestAndDeploy/robot_test/env/bin
+                                '''
+                            }
+                        }
+                    }
+                }
+                
                 stage("Run Robot-Test") {
                     steps {
                         dir('robot_test') {
                             script {
                                 sh '''
-                                . "/home/test/workspace/TestAndDeploy/robot_test/venv/bin/activate"
-                                robot test-plus.robot
-                                '''
+                                    . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
+                                    python3 /home/test/workspace/TestAndDeploy/robot_test/robot test-plus.robot
+                                    '''
                                 sh "docker ps -q -f name=flask-app | xargs -r docker stop"
                             }
                         }
