@@ -65,10 +65,10 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
-                            sh "docker stop flask-app || true"
-                            sh "docker rm -f flask-app || true"
-                            sh "docker ps -a -q -f name=flask-app"
-                            sh "docker run -d --name flask-app -p 5000:5000 flask-app"
+                            sh "sudo docker stop flask-app || true"
+                            sh "sudo docker rm -f flask-app || true"
+                            sh "sudo docker ps -a -q -f name=flask-app"
+                            sh "sudo docker run -d --name flask-app -p 5000:5000 flask-app"
                         }
                     }
                 }
@@ -102,7 +102,6 @@ pipeline {
                                     . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
                                     pip install robotframework
                                     pip install robotframework-seleniumlibrary
-                                    webdrivermanager chrome --linkpath /home/test/workspace/TestAndDeploy/robot_test/env/bin
                                 '''
                             }
                         }
