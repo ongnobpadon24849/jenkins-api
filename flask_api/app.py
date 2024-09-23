@@ -14,13 +14,12 @@ def getcode():
 @app.route('/plus/<num1>/<num2>', methods=['GET'])
 def plus(num1, num2):
     try:
-        num1 = int(num1)
-        num2 = int(num2)
+        num1 = eval(num1)
+        num2 = eval(num2)
 
-        # results = {
-        #         'plus' : num1 + num2,
-        #     }
-        results = f"INPUT {num1} + {num2} ==> OUTPUT : {results}"
+        results = {
+                'plus' : num1 + num2,
+            }
     except:
         results = { 'error_msg' : 'Invalid input' }
 
