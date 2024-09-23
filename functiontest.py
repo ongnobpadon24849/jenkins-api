@@ -21,13 +21,13 @@ class FlaskTestCase(unittest.TestCase):
         response = tester.get('/plus/3/4')
         self.assertEqual(response.status_code, 200)
         self.assertIn('INPUT 3 + 4 OUTPUT', response.data.decode('utf-8'))
-        self.assertIn('plus', response.data.decode('utf-8'))
+        self.assertIn('plus', response.data.decode('utf-8'), 7)
 
     def test_plus_invalid(self):
         tester = app.test_client(self)
         response = tester.get('/plus/3/abc')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('Invalid input', response.data.decode('utf-8'))
+        self.assertIn('error_msg', response.data.decode('utf-8'), 'Invalid input')
 
 if __name__ == '__main__':
     unittest.main()
