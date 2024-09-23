@@ -52,6 +52,7 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
+                            sh "docker ps -a -q -f name=flask-app | xargs -r docker rm -f"
                             sh "docker run -d --name flask-app -p 8080:5000 flask-app"
                         }
                     }
