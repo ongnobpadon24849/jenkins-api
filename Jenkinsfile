@@ -127,7 +127,7 @@ pipeline {
                     steps {
                         script {
                             sh "docker ps -a -q -f name=flask-app | xargs -r docker rm -f"
-                            sh "docker run -d --name flask-app -p 8080:3000 registry.gitlab.com/softdevthree/robot_test"
+                            sh "docker run -d --name flask-app -p 8080:5000 registry.gitlab.com/softdevthree/robot_test"
                         }
                     }
                 }
