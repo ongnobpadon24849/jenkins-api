@@ -127,7 +127,7 @@ pipeline {
                     steps {
                         script {
                             sh '''
-                                . /home/preprod/dockerenv/bin/activate
+                                . /home/preprod/myenv/bin/activate
                                 python3 /home/preprod/docker_rm.py
                                 '''
                             sh "docker run -d --name flask-app -p 8080:5000 registry.gitlab.com/softdevthree/robot_test"
