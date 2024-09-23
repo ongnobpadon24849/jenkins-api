@@ -39,6 +39,10 @@ pipeline {
                     steps {
                         script {
                             dir('flask_api') {
+                                sh '''
+                                . /home/test/robotenv/bin/activate
+                                python3 /home/test/docker_rm.py
+                                '''
                                 sh "docker build -t flask-app ."
                             }
                         }
@@ -48,10 +52,6 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
-                            sh '''
-                                . /home/test/robotenv/bin/activate
-                                python3 /home/test/docker_rm.py
-                                '''
                             sh "docker run -d --name flask-app -p 5000:5000 flask-app"
                         }
                     }
