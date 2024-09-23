@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
@@ -17,13 +17,14 @@ def plus(num1, num2):
         num1 = int(num1)
         num2 = int(num2)
 
-        results = {
-                'plus' : num1 + num2,
-            }
+        # results = {
+        #         'plus' : num1 + num2,
+        #     }
+        results = f"INPUT {num1} + {num2} ==> OUTPUT : {results}"
     except:
         results = { 'error_msg' : 'Invalid input' }
 
-    return f"INPUT {num1} + {num2} OUTPUT : {results}"
+    return jsonify(results)
 
 if __name__ == '__main__':
     app.run()
