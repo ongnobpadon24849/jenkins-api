@@ -106,7 +106,7 @@ pipeline {
         }
 
         stage('Agent Pre-Prod Server') {
-            agent { label 'VM_pre_prod' }
+            agent { label 'VM_preprod' }
             
             stages {
                 stage("Pull Docker Image") {
