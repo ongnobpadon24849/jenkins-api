@@ -23,28 +23,12 @@ pipeline {
                     }
                 }
 
-                stage("Install Dependencies Jenkins") {
-                    steps {
-                        script {
-                            dir('jenkins') {
-                                sh '''
-                                    if [ ! -d "/home/test/workspace/TestAndDeploy/jenkins/env" ]; then 
-                                    python3 -m venv /home/test/workspace/TestAndDeploy/jenkins/env
-                                    fi
-                                    . /home/test/workspace/TestAndDeploy/jenkins/env/bin/activate
-                                    pip install Flask
-                                '''
-                            }
-                        }
-                    }
-                }
-
                 stage("Unit Test") {
                     steps {
                         script {
                             dir('jenkins') {
                                 sh '''
-                                    . /home/test/workspace/TestAndDeploy/jenkins/env/bin/activate
+                                    . /home/test/robotenv/bin/activate
                                     python3 /home/test/workspace/TestAndDeploy/jenkins/functiontest.py
                                     '''
                             }
@@ -65,7 +49,10 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
-                            sh "docker ps -a -q -f name=flask-app | xargs -r docker rm -f"
+                            sh '''
+                                . /home/test/robotenv/bin/activate
+                                python3 /home/test/docker_rm.py
+                                '''
                             sh "docker run -d --name flask-app -p 5000:5000 flask-app"
                         }
                     }
@@ -89,32 +76,15 @@ pipeline {
                     }
                 }
 
-                stage("Install Dependencies Robot-Test") {
-                    steps {
-                        script {
-                            dir('robot_test') {
-                                sh '''
-                                    if [ ! -d "/home/test/workspace/TestAndDeploy/robot_test/env" ]; then 
-                                    python3 -m venv /home/test/workspace/TestAndDeploy/robot_test/env
-                                    fi
-                                    . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
-                                    pip install robotframework
-                                    pip install robotframework-seleniumlibrary
-                                '''
-                            }
-                        }
-                    }
-                }
-
                 stage("Run Robot-Test") {
                     steps {
                         dir('robot_test') {
                             script {
                                 sh '''
-                                    . /home/test/workspace/TestAndDeploy/robot_test/env/bin/activate
+                                    . /home/test/robotenv/bin/activate
                                     robot /home/test/workspace/TestAndDeploy/robot_test/test-plus.robot
+                                    python3 /home/test/docker_stop.py
                                     '''
-                                sh "docker ps -q -f name=flask-app | xargs -r docker stop"
                             }
                         }
                     }
