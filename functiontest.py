@@ -14,7 +14,7 @@ class FlaskTestCase(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.get('/getcode')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data.decode('utf-8'), "SDPX GROUP 3 Noppadon Panboonyeun")
+        self.assertEqual(response.data.decode('utf-8'), "SDPX GROUP 3 Date: 2021-09-30")
 
     def test_plus_valid(self):
         tester = app.test_client(self)
