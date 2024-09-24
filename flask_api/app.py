@@ -20,7 +20,7 @@ def plus(num1, num2):
         results = {
             'Num1' : num1,
             'Num2' : num2,
-            'Operator' : 'plus',
+            'Operator' : 'plus (+)',
             'Results' : num1 + num2,
             }
     except:
