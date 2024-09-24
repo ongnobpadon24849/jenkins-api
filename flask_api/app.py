@@ -8,7 +8,7 @@ def index():
 
 @app.route('/getcode', methods=['GET'])
 def getcode():
-    return "SDPX GROUP 3 GETCODE API"
+    return "SDPX GROUP 3 /getcode Naja"
 
 
 @app.route('/plus/<num1>/<num2>', methods=['GET'])
