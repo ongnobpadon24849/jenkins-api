@@ -11,17 +11,18 @@ pipeline {
                             withCredentials([usernamePassword(credentialsId: "Gitlab_ongnobpadon24849", 
                                                             usernameVariable: "GIT_USERNAME", 
                                                             passwordVariable: "GIT_PASSWORD")]) {
-                                dir('jenkins') {
-                                    if (fileExists('.git')) {
+                                if (fileExists('jenkins')) {
+                                    dir('jenkins') {
                                         sh "git pull origin main"
-                                    } else {
-                                        sh "git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/softdevthree/jenkins.git ."
                                     }
+                                } else {
+                                    sh "git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/softdevthree/jenkins.git ."
                                 }
                             }
                         }
                     }
                 }
+
                 stage("Unit Test") {
                     steps {
                         script {
@@ -64,12 +65,12 @@ pipeline {
                             withCredentials([usernamePassword(credentialsId: "Gitlab_ongnobpadon24849", 
                                                             usernameVariable: "GIT_USERNAME", 
                                                             passwordVariable: "GIT_PASSWORD")]) {
-                                dir('robot_test') {
-                                    if (fileExists('.git')) {
+                                if (fileExists('robot_test')) {
+                                    dir('robot_test') {
                                         sh "git pull origin main"
-                                    } else {
-                                        sh "git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/softdevthree/robot_test.git ."
                                     }
+                                } else {
+                                    sh "git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/softdevthree/robot_test.git ."
                                 }
                             }
                         }
