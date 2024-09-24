@@ -98,8 +98,8 @@ pipeline {
                                                             usernameVariable: "GIT_USERNAME", 
                                                             passwordVariable: "GIT_PASSWORD")]) {
                                 sh "docker login -u ${GIT_USERNAME} -p ${GIT_PASSWORD} registry.gitlab.com"
-                                sh "docker tag flask-app registry.gitlab.com/softdevthree/robot_test"
-                                sh "docker push registry.gitlab.com/softdevthree/robot_test"
+                                sh "docker tag flask-app registry.gitlab.com/softdevthree/jenkins"
+                                sh "docker push registry.gitlab.com/softdevthree/jenkins"
                             }
                         }
                     }
@@ -118,7 +118,7 @@ pipeline {
                                                             usernameVariable: "GIT_USERNAME", 
                                                             passwordVariable: "GIT_PASSWORD")]) {
                                 sh "docker login -u ${GIT_USERNAME} -p ${GIT_PASSWORD} registry.gitlab.com"
-                                sh "docker pull registry.gitlab.com/softdevthree/robot_test"
+                                sh "docker pull registry.gitlab.com/softdevthree/jenkins"
                             }
                         }
                     }
@@ -131,7 +131,7 @@ pipeline {
                                 . /home/preprod/myenv/bin/activate
                                 python3 /home/preprod/docker_rm.py
                                 '''
-                            sh "docker run -d --name flask-app -p 8080:5000 registry.gitlab.com/softdevthree/robot_test"
+                            sh "docker run -d --name flask-app -p 8080:5000 registry.gitlab.com/softdevthree/jenkins"
                         }
                     }
                 }
