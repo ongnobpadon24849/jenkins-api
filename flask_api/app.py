@@ -18,10 +18,13 @@ def plus(num1, num2):
         num2 = eval(num2)
 
         results = {
-                'plus' : num1 + num2,
+            'Num1' : num1,
+            'Num2' : num2,
+            'Operator' : 'plus',
+            'Results' : num1 + num2,
             }
     except:
-        results = { 'error_msg' : 'Invalid input' }
+        results = { 'ERROR' : 'NOT NUMBER' }
 
     return jsonify(results)
 
