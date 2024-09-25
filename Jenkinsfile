@@ -131,7 +131,7 @@ pipeline {
                             //     . /home/preprod/myenv/bin/activate
                             //     python3 /home/preprod/docker_rm.py
                             //     '''
-                            sh "docker ps -a -q -f name=${DOCKER_IMAGE_NAME} | xargs -r docker rm -f"
+                            sh "docker ps -a -q -f name=flask-app | xargs -r docker rm -f"
                             sh "docker run -d --name flask-app -p 8080:5000 registry.gitlab.com/softdevthree/jenkins"
                         }
                     }
