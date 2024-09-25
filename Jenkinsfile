@@ -16,7 +16,7 @@ pipeline {
                                         sh "git pull origin main"
                                     }
                                 } else {
-                                    sh "git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/softdevthree/jenkins.git ."
+                                    sh "git clone https://${GIT_PASSWORD}@gitlab.com/softdevthree/jenkins.git ."
                                 }
                             }
                         }
@@ -70,7 +70,7 @@ pipeline {
                                         sh "git pull origin main"
                                     }
                                 } else {
-                                    sh "git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@gitlab.com/softdevthree/robot_test.git ."
+                                    sh "git clone https://${GIT_PASSWORD}@gitlab.com/softdevthree/robot_test.git ."
                                 }
                             }
                         }
