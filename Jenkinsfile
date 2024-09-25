@@ -29,7 +29,7 @@ pipeline {
                             dir('jenkins') {
                                 sh '''
                                     . /home/test/my_env/bin/activate
-                                    python3 /home/test/workspace/TestAndDeploy/jenkins/functiontest.py
+                                    python3 /home/test/workspace/JenkinsAndDeploy/jenkins/functiontest.py
                                     '''
                             }
                         }
@@ -83,7 +83,7 @@ pipeline {
                             script {
                                 sh '''
                                     . /home/test/my_env/bin/activate
-                                    robot /home/test/workspace/TestAndDeploy/robot_test/test-plus.robot
+                                    robot /home/test/workspace/JenkinsAndDeploy/robot_test/test-plus.robot
                                     '''
                                     // python3 /home/test/docker_stop.py
                             }
