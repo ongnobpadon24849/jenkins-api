@@ -16,7 +16,7 @@ pipeline {
                                         sh "git pull origin main"
                                     }
                                 } else {
-                                    sh "git clone https://${GIT_PASSWORD}@gitlab.com/softdevthree/jenkins.git ."
+                                    sh "git clone https://${GIT_PASSWORD}@gitlab.com/softdevthree/jenkins.git"
                                 }
                             }
                         }
@@ -28,7 +28,7 @@ pipeline {
                         script {
                             dir('jenkins') {
                                 sh '''
-                                    . /home/test/robotenv/bin/activate
+                                    . /home/test/my_env/bin/activate
                                     python3 /home/test/workspace/TestAndDeploy/jenkins/functiontest.py
                                     '''
                             }
@@ -40,10 +40,10 @@ pipeline {
                     steps {
                         script {
                             dir('flask_api') {
-                                sh '''
-                                . /home/test/robotenv/bin/activate
-                                python3 /home/test/docker_rm.py
-                                '''
+                                // sh '''
+                                // . /home/test/my_env/bin/activate
+                                // python3 /home/test/docker_rm.py
+                                // '''
                                 sh "docker build -t flask-app ."
                             }
                         }
@@ -70,7 +70,7 @@ pipeline {
                                         sh "git pull origin main"
                                     }
                                 } else {
-                                    sh "git clone https://${GIT_PASSWORD}@gitlab.com/softdevthree/robot_test.git ."
+                                    sh "git clone https://${GIT_PASSWORD}@gitlab.com/softdevthree/robot_test.git"
                                 }
                             }
                         }
@@ -82,10 +82,10 @@ pipeline {
                         dir('robot_test') {
                             script {
                                 sh '''
-                                    . /home/test/robotenv/bin/activate
+                                    . /home/test/my_env/bin/activate
                                     robot /home/test/workspace/TestAndDeploy/robot_test/test-plus.robot
-                                    python3 /home/test/docker_stop.py
                                     '''
+                                    // python3 /home/test/docker_stop.py
                             }
                         }
                     }
@@ -127,10 +127,11 @@ pipeline {
                 stage("Run Docker Container") {
                     steps {
                         script {
-                            sh '''
-                                . /home/preprod/myenv/bin/activate
-                                python3 /home/preprod/docker_rm.py
-                                '''
+                            // sh '''
+                            //     . /home/preprod/myenv/bin/activate
+                            //     python3 /home/preprod/docker_rm.py
+                            //     '''
+                            sh "docker ps -a -q -f name=${DOCKER_IMAGE_NAME} | xargs -r docker rm -f"
                             sh "docker run -d --name flask-app -p 8080:5000 registry.gitlab.com/softdevthree/jenkins"
                         }
                     }
